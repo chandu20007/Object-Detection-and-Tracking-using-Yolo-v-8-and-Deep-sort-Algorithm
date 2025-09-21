@@ -1,64 +1,109 @@
-# Object-Detection-and-Tracking-using-Yolo-v-8-and-Deep-sort-Algorithm
-Project is a Streamlit web app designed for real-time object detection and tracking. It uses the YOLOv8 model and Deep SORT algorithm to detect objects in images, videos, live camera feeds, and streamed video from a phone. The app processes these sources and displays the detected objects directly within the interface.
-# Steps to set up the Project
-Here's a step-by-step guide on how to build and use your Streamlit web app for real-time object detection and tracking:
+# Object Detection and Tracking Dashboard
 
-### Step 1: Set Up the Environment
-1. Install Python:Ensure you have Python installed on your machine.
-2. Create a Virtual Environment:
-   - Open your terminal or command prompt.
-   - Navigate to your project directory.
-   - Create a virtual environment using: `python -m venv venv`
-   - Activate the environment:
-     - On Windows: `venv\Scripts\activate`
-     - On macOS/Linux: `source venv/bin/activate`
-3. Install Required Libraries:
-   - Install the necessary Python packages by running:
-     ```bash
-     pip install streamlit opencv-python-headless ultralytics deep_sort_realtime numpy pandas pillow
-     ```
+## Overview
+This project is a real-time object detection and tracking web application built using Streamlit, YOLOv8, and DeepSort. The dashboard supports image, video, webcam, and phone stream sources for object detection and tracking. It offers a modern, user-friendly interface with a customizable background and a sidebar for controls, including source selection and tracked objects display.
 
-###Step 2: Build the Streamlit Web App
-1. Set Up Your Project Structure:
-   - Create directories for images, weights, and any other assets you need (e.g., `images/`, `weights/`).
-   - Place the YOLOv8 model weights (`yolov8n.pt`) in the `weights/` directory.
-   - Place any default images you want to use in the `images/` directory.
+An on-demand analytics feature includes interactive charts and graphs for analyzing detected object counts over time, helping visualize detections and track trends effectively.
 
-2. Write the Streamlit App Code:
-   - Create a new Python file, e.g., `app.py`, in your project directory.
-   - Use the code you developed to load the YOLOv8 model, initialize the Deep SORT tracker, and set up the Streamlit interface.
-   - Make sure to include options to select input sources (image, video, camera, phone stream) and adjust the model confidence level.
+## Features
+- Real-time object detection using the YOLOv8 model.
+- Object tracking with DeepSort, including unique track IDs.
+- Supports multiple input sources:
+  - Image upload
+  - Video upload
+  - Webcam live feed
+  - Phone camera stream via URL
+- Clean, attractive dashboard design with custom background and theming.
+- Sidebar with control widgets for source selection and displaying tracked object details.
+- On-demand analytics panel accessible from sidebar:
+  - Bar charts of object counts per frame
+  - Line charts showing count trends across frames
+  - Grouped bar charts for detailed per-frame analysis
+- Analytics visualize only previously detected objects and can be toggled by user.
+- Responsive layout for smooth user experience.
 
-### Step 3: Run the Streamlit App
-1. Start the App:
-   - In your terminal, navigate to your project directory and run:
-     ```bash
-     streamlit run app.py
-     ```
-   - This will launch the Streamlit web app in your default web browser.
+## Installation
 
-### Step 4: Use the Web App
-1. Select the Source:
-   - Choose from the available input sources: Image, Video, Camera, or Phone Stream.
-   
-2. Upload or Stream Content:
-   - For Image: Upload an image file (JPEG, PNG).
-   - For Video: Upload a video file (MP4, AVI, etc.).
-   - For Camera: Click the "Use Webcam" button to start the camera feed.
-   - For Phone Stream: Enter the stream URL from your phone’s streaming app.
+### Prerequisites
+- Python 3.8 or higher
+- NVIDIA GPU (recommended for YOLOv8 real-time performance)
+- Git (for cloning repo)
 
-3. Set Confidence Level:
-   - Adjust the confidence slider to set the threshold for object detection.
+### Required Python Packages
+Install dependencies via pip:
 
-4. View Results:
-   - The app will display the processed images or video frames with detected objects highlighted.
-   - The object counts and tracking data will be displayed in the app interface.
+```bash
+pip install streamlit opencv-python ultralytics deep_sort_realtime pillow pandas plotly tabulate
+```
 
-### Step 5: Analyze Results
-1. Review Detected Objects:
-   - The app displays a table or list showing the tracked objects and additional data.
+- `streamlit`: Web app framework.
+- `opencv-python`: Image and video processing.
+- `ultralytics`: YOLOv8 model and inference.
+- `deep_sort_realtime`: DeepSort tracking implementation.
+- `pillow`: Image handling.
+- `pandas`: Data manipulation for analytics.
+- `plotly`: Interactive plotting.
+- `tabulate`: Terminal formatted tables (optional for debugging).
 
-2. Monitor Real-Time Feeds:
-   - If using the camera or phone stream, you can monitor and analyze object movement in real-time.
+## Usage
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////
+1. Clone the repository:
+
+```bash
+git clone <repo-url>
+cd <repo-folder>
+```
+
+2. Place your YOLOv8 weights file (e.g., `yolov8n.pt`) inside `weights/` directory as per project structure.
+
+3. Add a background image inside the `Images/` folder or update the path in the code to your preferred image.
+
+4. Run the Streamlit app:
+
+```bash
+streamlit run object_detection.py
+```
+
+5. Use the sidebar to select the input source:
+   - Upload images or videos for detection.
+   - Use live webcam feed.
+   - Connect to a phone stream by entering its URL.
+
+6. Perform detections and see tracking results visualized with bounding boxes and labels.
+
+7. Click the **"Show Analytics"** button in the sidebar to view interactive charts analyzing detected objects over time.
+
+## Project Structure
+
+```
+├── Images/
+│   └── object-detection-illustration.png   # Background image for the dashboard
+├── weights/
+│   └── yolov8n.pt                          # YOLOv8 model weights
+├── object_detection.py                     # Main Streamlit app script
+├── README.md                              # This file
+└── requirements.txt                       # (Optional) Python package list
+```
+
+## Notes
+
+- For best performance, run on a machine with a CUDA-enabled GPU.
+- Analytics data accumulate during the session; restarting the app clears data.
+- Phone Stream requires a compatible streaming app (like IP Webcam or EpocCam) running on the phone.
+- Adjust the background image path in the script as needed.
+- Use stable internet and camera device drivers for smoother streaming.
+
+## Future Enhancements
+
+- Add filters and search for tracked objects in sidebar.
+- Export tracking data and analytics charts as CSV or images.
+- Add alert/notification system for particular object detections.
+- Performance optimization for longer video and stream sessions.
+- Multi-camera support and customizable tracking parameters.
+
+## License
+This project is open-source and available under the MIT License.
+
+***
+
+This project showcases integrating state-of-the-art object detection and tracking algorithms into an interactive web dashboard with useful analytics, ideal for surveillance, smart monitoring, and research purposes.
